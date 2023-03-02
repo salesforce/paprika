@@ -1,0 +1,44 @@
+# -- Project settings:
+exp_name: DS_pseudo_labels
+notes: none
+project: pafomo
+entity: hongluzhou
+
+
+# -- External knowledge settings:
+need_external_knowledge: True
+external_knowledge_ready: False
+segment_wikistep_sim_scores_DS_ready: False
+pseudo_label_DS_ready: False
+
+
+# -- wikiHow settings:
+wikihow_dir: /export/share/hongluzhou/data/wikiHow
+wikihow_num_tasks: 1053
+
+
+# -- HowTo100M settings:
+# howto100m_dir: /export/share/hongluzhou/data/sample_howto100m
+howto100m_dir: /export/share/hongluzhou/data/howto100m
+
+
+# -- Pseudo label settings:
+label_find_matched_steps_criteria: topK
+# {threshold | threshold+topK | topK}
+label_find_matched_steps_for_segments_thresh: 8
+label_find_matched_steps_for_segments_topK: 3
+num_steps: 10588
+
+
+# -- General settings:
+seed: -1
+# seed is -1 means random, otherwise put a seed number that is greater than 0
+curr_time: -1
+num_workers: 95
+# num_workers -1 will dynamically compute the number of available workers
+working_abspath: 
+
+
+# -- Output settings:
+checkpoint_dir: /export/home/outputs/pafomo/output_checkpoints/
+log_dir: /export/home/outputs/pafomo/output_logs/

@@ -1,0 +1,1 @@
+CUDA_VISIBLE_DEVICES=0 python engines/main_DS_pretrain.py --cfg configs/DS_pretrain.yml

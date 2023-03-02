@@ -1,0 +1,89 @@
+# -- Project settings:
+exp_name: PKG_pseudo_labels
+notes: none
+project: pafomo
+entity: hongluzhou
+
+
+# -- External knowledge settings:
+need_external_knowledge: True
+external_knowledge_ready: False
+segment_wikistep_sim_scores_ready: False
+# nodes_formed: False
+# edges_formed: False
+pseudo_label_VNM_ready: False
+pseudo_label_VTM_ready: False
+pseudo_label_TCL_ready: False
+pseudo_label_NRL_ready: False
+
+
+# -- wikiHow settings:
+wikihow_dir: /export/share/hongluzhou/data/wikiHow
+wikihow_num_tasks: 1053
+
+
+# -- HowTo100M settings:
+howto100m_dir: /export/share/hongluzhou/data/howto100m
+howto100m_num_tasks: 1059
+
+video_meta_csv_path: /export/einstein-vision/multimodal_video/datasets/HowTo100M/HowTo100M_v1.csv
+task_id_to_task_name_csv_path: /export/einstein-vision/multimodal_video/datasets/HowTo100M/task_ids.csv
+
+
+# -- Graph node settings:
+remove_step_duplicates: True
+step_clustering_linkage: single
+step_clustering_distance_thresh: 0.09
+step_clustering_affinity: cosine
+num_nodes: 10038
+# 10038 if remove_step_duplicates or 10588 if not
+
+
+# -- Graph edge settings:
+graph_find_matched_steps_criteria: threshold
+# {threshold | threshold+topK | topK}
+graph_find_matched_steps_for_segments_thresh: 10
+graph_find_matched_steps_for_segments_topK: 3
+edge_min_aggconf: 1000
+
+
+# -- Pseudo label settings:
+# ---- VNM
+label_find_matched_nodes_criteria: topK
+# {threshold | threshold+topK | topK}
+label_find_matched_nodes_for_segments_thresh: 8
+label_find_matched_nodes_for_segments_topK: 3
+
+# ---- VTN
+label_find_tasks_criteria: topK
+# {threshold | threshold+topK | topK}
+label_find_tasks_thresh: 50
+label_find_tasks_topK: 20
+
+# ---- TCL
+label_find_tasknodes_criteria: topK
+# {threshold | threshold+topK | topK}
+label_find_tasknodes_thresh: 50
+label_find_tasknodes_topK: 20
+label_num_howto100m_tasks_to_consider: 3
+
+# ---- NRL
+label_find_neighbors_criteria: topK
+# {threshold | threshold+topK | topK}
+label_find_neighbors_thresh: 0.5
+label_find_neighbors_topK: 20
+label_khop: 2
+
+
+# -- General settings:
+seed: -1
+# seed is -1 means random, otherwise put a seed number that is greater than 0
+curr_time: -1
+num_workers: 95
+# num_workers -1 will dynamically compute the number of available workers
+working_abspath: 
+
+
+# -- Output settings:
+checkpoint_dir: /export/home/outputs/pafomo/output_checkpoints/
+log_dir: /export/home/outputs/pafomo/output_logs/

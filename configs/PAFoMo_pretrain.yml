@@ -1,0 +1,107 @@
+# -- Project settings:
+exp_name: PAFoMo_pretrain
+notes: none
+project: pafomo
+entity: hongluzhou
+
+
+# -- wikiHow settings:
+wikihow_dir: /export/share/hongluzhou/data/wikiHow
+wikihow_num_tasks: 1053
+
+
+# -- HowTo100M settings:
+howto100m_dir: /export/share/hongluzhou/data/howto100m
+howto100m_num_tasks: 1059
+
+
+# -- Pseudo label settings:
+num_nodes: 10038
+# ---- VNM
+label_find_matched_nodes_criteria: topK
+# {threshold | threshold+topK | topK}
+label_find_matched_nodes_for_segments_thresh: 8
+label_find_matched_nodes_for_segments_topK: 3
+
+# ---- VTN
+label_find_tasks_criteria: topK
+# {threshold | threshold+topK | topK}
+label_find_tasks_thresh: 50
+label_find_tasks_topK: 20
+
+# ---- TCL
+label_find_tasknodes_criteria: topK
+# {threshold | threshold+topK | topK}
+label_find_tasknodes_thresh: 50
+label_find_tasknodes_topK: 20
+label_num_howto100m_tasks_to_consider: 3
+
+# ---- NRL
+label_find_neighbors_criteria: topK
+# {threshold | threshold+topK | topK}
+label_find_neighbors_thresh: 0.5
+label_find_neighbors_topK: 20
+label_khop: 2
+
+
+# -- Adapter settings:
+adapter_name: adapter_mlp
+s3d_hidden_dim: 512
+bottleneck_dim: 128
+adapter_refined_feat_dim: 512
+
+
+# -- Pretrain objective settings:
+adapter_objective: PKG_VNM_VTM_TCL_NRL
+pretrain_khop: 2
+# ---- VNM setup
+adapter_VNM_num_matched_nodes_for_segments: 3
+# ---- VTM setup
+adapter_VTM_enable_wikihow_tasks: True
+adapter_VTM_enable_howto100m_tasks: True
+adapter_VTM_num_howto100m_tasks_to_consider: 3
+# ---- TCL setup
+adapter_TCL_enable_wikihow_tasknodes: True
+adapter_TCL_enable_howto100m_tasknodes: False
+adapter_TCL_num_howto100m_tasknodes_to_consider: 10
+# ---- NRl setup
+adapter_NRL_num_neighbors_to_consider: 
+- 5
+- 3
+# ---- loss ratios
+VNM_loss_ratio: 1
+VTM_loss_ratio: 1
+TCL_loss_ratio: 1
+NRL_loss_ratio: 1
+
+
+# -- Adapter training settings:
+adapter_start_save_epoch: 1
+adapter_save_freq: 10
+adapter_batch_size: 256
+adapter_num_epochs: 3000
+adapter_batch_train_log_freq: 2000
+adapter_optimizer: 'adam'
+adapter_learning_rate: 0.0001
+adapter_weight_decay: 0
+adapter_lr_warm_up: False
+
+
+# -- General settings:
+seed: 90
+# seed is -1 means random, otherwise put a seed number that is greater than 0
+cudnn_benchmark: True
+curr_time: -1
+num_workers: -1
+# num_workers -1 will dynamically compute the number of available workers
+device: cuda
+working_abspath: 
+ddp_log_each_rank: False
+rank: -1
+world_size: -1 
+partition_dataset: True
+
+
+# -- Output settings:
+checkpoint_dir: /export/home/outputs/pafomo/output_checkpoints/
+log_dir: /export/home/outputs/pafomo/output_logs/

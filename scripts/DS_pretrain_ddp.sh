@@ -1,0 +1,1 @@
+CUDA_VISIBLE_DEVICES=0,1,2,3,4,5,6,7 python -m torch.distributed.launch --nnodes=1 --nproc_per_node=8 engines/main_DS_pretrain.py --cfg configs/DS_pretrain.yml --use_ddp 1 --use_wandb 0

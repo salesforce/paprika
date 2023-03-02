@@ -1,0 +1,126 @@
+# -- Project settings:
+exp_name: mlp_coin_sf
+notes: none
+project: pafomo
+entity: hongluzhou
+
+
+# -- Adapter settings:
+adapter_inference: True
+adapter_name: adapter_mlp
+s3d_hidden_dim: 512
+bottleneck_dim: 128
+adapter_refined_feat_dim: 512
+
+
+# -- Downstream settings:
+downstream_dataset_name: COIN
+# {CrossTask | COIN}
+downstream_task_name: step_forecasting
+# { task_cls | step_cls | step_forecasting }
+
+
+# -- CrossTask settings:
+cross_task_video_dir: /export/einstein-vision/multimodal_video/datasets/CrossTask/videos
+cross_task_s3d_feat_dir: /export/share/hongluzhou/data/crosstask/feats
+
+
+# -- COIN settings:
+coin_video_dir: /export/einstein-vision/multimodal_video/datasets/COIN/videos
+coin_annoataion_json: /export/einstein-vision/multimodal_video/datasets/COIN/annotations/COIN.json
+coin_s3d_feat_dir: /export/share/hongluzhou/data/coin/feats
+coin_step_forecasting_history: 1
+
+
+# -- Model settings:
+# ---- Video pretrained model:
+model_video_pretrained_dim: 512
+
+# ---- Task head task_cls
+model_task_cls_head_name: downstream_mlp
+# { downstream_transformer | downstream_mlp }
+model_task_cls_segment_hidden_dim: 512
+model_task_cls_time_pos_embed_type: absolute_learned_1D
+model_task_cls_max_time_ids_embed: 500
+# --------- Task head task_cls trasformer configurations
+model_task_cls_tx_nhead: 8
+model_task_cls_tx_dim_feedforward: 1024
+model_task_cls_tx_dropout: 0
+model_task_cls_tx_activation: relu
+# --------- 
+# --------- Classifier
+model_task_cls_classifier_hidden_dim: 128
+model_task_cls_num_classes: 180
+# cross task - task recognition: 83
+# coin - task recognition: 180
+
+
+# ---- Task head step_cls
+model_step_cls_head_name: downstream_mlp
+# { downstream_transformer | downstream_mlp }
+model_step_cls_segment_hidden_dim: 512
+model_step_cls_time_pos_embed_type: absolute_learned_1D
+model_step_cls_max_time_ids_embed: 500
+# --------- Task head step_cls trasformer configurations
+model_step_cls_tx_nhead: 8
+model_step_cls_tx_dim_feedforward: 1024
+model_step_cls_tx_dropout: 0
+model_step_cls_tx_activation: relu
+# --------- 
+# --------- Classifier
+model_step_cls_classifier_hidden_dim: 768
+model_step_cls_num_classes: 778
+# cross task - step cls: 105
+# coin - step cls: 778
+
+
+# ---- Task head step_forecasting
+model_step_forecasting_head_name: downstream_mlp
+# { downstream_transformer | downstream_mlp }
+model_step_forecasting_segment_hidden_dim: 512
+model_step_forecasting_time_pos_embed_type: absolute_learned_1D
+model_step_forecasting_max_time_ids_embed: 500
+# --------- Task head step_forecasting trasformer configurations
+model_step_forecasting_tx_nhead: 8
+model_step_forecasting_tx_dim_feedforward: 1024
+model_step_forecasting_tx_dropout: 0
+model_step_forecasting_tx_activation: relu
+# --------- 
+# --------- Classifier
+model_step_forecasting_classifier_hidden_dim: 768
+model_step_forecasting_num_classes: 778
+# cross task - step forecasting: 105
+# coin - step forecasting: 778
+
+
+# ---- Task head training settings
+always_save_best_task_head_each_epoch: True
+task_head_batch_size: 16
+task_head_num_epochs: 1000
+task_head_early_stop_patience: 50
+task_head_batch_train_log_freq: 500
+task_head_batch_test_log_freq: 100
+task_head_optimizer: 'adam'
+task_head_learning_rate: 0.0001
+task_head_weight_decay: 0.001
+task_head_lr_warm_up: False
+task_head_warmup_steps: 5000
+
+
+# -- General settings:
+seed: 90
+# seed is -1 means random, otherwise put a seed number that is greater than 0
+cudnn_benchmark: True
+curr_time: -1
+
+
+# -- Runtime settings:
+num_workers: -1
+# num_workers -1 will dynamically compute the number of available workers
+device: cuda
+working_abspath: 
+
+
+# -- Output settings:
+checkpoint_dir: /export/home/outputs/pafomo/output_checkpoints/
+log_dir: /export/home/outputs/pafomo/output_logs/

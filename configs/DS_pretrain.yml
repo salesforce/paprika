@@ -1,0 +1,62 @@
+# -- Project settings:
+exp_name: DS_pretrain
+notes: none
+project: pafomo
+entity: hongluzhou
+
+
+# -- HowTo100M settings:
+howto100m_dir: /export/share/hongluzhou/data/howto100m
+
+
+# -- Pseudo label settings:
+label_find_matched_steps_criteria: topK
+# {threshold | threshold+topK | topK}
+label_find_matched_steps_for_segments_thresh: 8
+label_find_matched_steps_for_segments_topK: 3
+num_steps: 10588
+
+
+# -- Adapter settings:
+adapter_name: adapter_mlp
+bottleneck_dim: 128
+adapter_refined_feat_dim: 512
+
+
+# -- Pretrain objective settings:
+s3d_hidden_dim: 512
+adapter_objective: DS
+adapter_topk: 3
+adapter_num_classes: 10588
+
+
+# -- Adapter training settings:
+adapter_start_save_epoch: 1
+adapter_save_freq: 10
+adapter_batch_size: 256
+adapter_num_epochs: 3000
+adapter_batch_train_log_freq: 2000
+adapter_optimizer: 'adam'
+adapter_learning_rate: 0.0001
+adapter_weight_decay: 0
+adapter_lr_warm_up: False
+ 
+
+# -- General settings:
+seed: 90
+# seed is -1 means random, otherwise put a seed number that is greater than 0
+cudnn_benchmark: True
+curr_time: -1
+num_workers: -1
+# num_workers -1 will dynamically compute the number of available workers
+device: cuda
+working_abspath: 
+ddp_log_each_rank: False
+rank: -1
+world_size: -1 
+partition_dataset: True
+
+
+# -- Output settings:
+checkpoint_dir: /export/home/outputs/pafomo/output_checkpoints/
+log_dir: /export/home/outputs/pafomo/output_logs/
