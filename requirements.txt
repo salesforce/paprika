@@ -1,0 +1,11 @@
+matplotlib==3.5.3
+monai==1.1.0
+numpy==1.21.2
+pandas==1.4.3
+PyYAML==6.0
+scikit_learn==1.2.2
+scipy==1.9.1
+sentence_transformers==2.2.2
+torch==1.11.0
+tqdm==4.62.3
+wandb==0.13.11
