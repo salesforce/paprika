@@ -1,8 +1,8 @@
 # -- Project settings:
 exp_name: DS_pretrain
 notes: none
-project: pafomo
-entity: hongluzhou
+project: 
+entity: 
 
 
 # -- HowTo100M settings:
@@ -58,5 +58,5 @@ partition_dataset: True
 
 
 # -- Output settings:
-checkpoint_dir: /export/home/outputs/pafomo/output_checkpoints/
-log_dir: /export/home/outputs/pafomo/output_logs/
+checkpoint_dir: /export/home/outputs/DS/output_checkpoints/
+log_dir: /export/home/outputs/DS/output_logs/

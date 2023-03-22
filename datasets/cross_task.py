@@ -122,8 +122,8 @@ class CrossTask_Task_CLS(Dataset):
         self.logger = logger
         
         self.task_sid2iid = defaultdict()
-        self.task_iid2sid = defaultdict()
-        self.get_task_ids()
+        # self.task_iid2sid = defaultdict()
+        # self.get_task_ids()
         
         with open(os.path.join(
             args.cross_task_s3d_feat_dir, 
@@ -132,17 +132,42 @@ class CrossTask_Task_CLS(Dataset):
         self.sample_video_paths = []
         for task in split_samples:
             self.sample_video_paths += split_samples[task] 
+            
+        self.get_task_ids()
+        
         
     def __len__(self):
         return len(self.sample_video_paths)
-        
+    
     def get_task_ids(self):
-        task_sids = os.listdir(self.args.cross_task_video_dir)
-        for i in range(len(task_sids)):
-            task_sid = task_sids[i]
-            self.task_sid2iid[task_sid] = i
-            self.task_iid2sid[i] = task_sid
+        
+        with open(os.path.join(
+            self.args.cross_task_s3d_feat_dir, 
+            'task_cls_train_split.pickle'), 'rb') as f:
+            train_split_samples = pickle.load(f)
+        with open(os.path.join(
+            self.args.cross_task_s3d_feat_dir, 
+            'task_cls_test_split.pickle'), 'rb') as f:
+            test_split_samples = pickle.load(f)
+            
+        for task in train_split_samples:
+            if task not in self.task_sid2iid:
+                task_iid = len(self.task_sid2iid)
+                self.task_sid2iid[task] = task_iid
+                
+        for task in test_split_samples:
+            if task not in self.task_sid2iid:
+                task_iid = len(self.task_sid2iid)
+                self.task_sid2iid[task] = task_iid
         return
+    
+    # def get_task_ids(self):
+    #     task_sids = os.listdir(self.args.cross_task_video_dir)
+    #     for i in range(len(task_sids)):
+    #         task_sid = task_sids[i]
+    #         self.task_sid2iid[task_sid] = i
+    #         # self.task_iid2sid[i] = task_sid
+    #     return
     
     @staticmethod  
     def custom_collate(batch):
@@ -207,12 +232,15 @@ class CrossTask_Step_CLS(Dataset):
         # obtain the samples
         self.samples = []
         for video_annot_file in split_samples:
+            video_annot_file_to_load = os.path.join(
+                self.args.cross_task_annoataion_dir, video_annot_file.split('/')[-1])
+            
             anno_csv = pd.read_csv(
-                video_annot_file, 
+                video_annot_file_to_load, 
                 names=['step class id', 'start in seconds', 'end in seconds'])
 
             for step_idx in range(len(anno_csv['step class id'])):
-                self.samples.append((video_annot_file, step_idx))
+                self.samples.append((video_annot_file_to_load, step_idx))
             
     def __len__(self):
         return len(self.samples)
@@ -305,12 +333,15 @@ class CrossTask_Step_Forecast(Dataset):
         # obtain the samples
         self.samples = []
         for video_annot_file in split_samples:
+            video_annot_file_to_load = os.path.join(
+                self.args.cross_task_annoataion_dir, video_annot_file.split('/')[-1])
+            
             anno_csv = pd.read_csv(
-                video_annot_file, 
+                video_annot_file_to_load, 
                 names=['step class id', 'start in seconds', 'end in seconds'])
 
             for step_idx in range(len(anno_csv['step class id']) - args.coin_step_forecasting_history):
-                self.samples.append((video_annot_file, step_idx + args.coin_step_forecasting_history))
+                self.samples.append((video_annot_file_to_load, step_idx + args.coin_step_forecasting_history))
             
     def __len__(self):
         return len(self.samples)

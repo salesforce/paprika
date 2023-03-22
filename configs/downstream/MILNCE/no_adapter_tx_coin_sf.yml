@@ -1,8 +1,8 @@
 # -- Project settings:
 exp_name: no_adapter_tx_coin_sf
 notes: none
-project: pafomo
-entity: hongluzhou
+project: 
+entity: 
 
 
 # -- Downstream settings:
@@ -15,6 +15,7 @@ downstream_task_name: step_forecasting
 # -- CrossTask settings:
 cross_task_video_dir: /export/einstein-vision/multimodal_video/datasets/CrossTask/videos
 cross_task_s3d_feat_dir: /export/share/hongluzhou/data/crosstask/feats
+cross_task_annoataion_dir: /export/share/hongluzhou/data/crosstask/crosstask_release/annotations
 
 
 # -- COIN settings:
@@ -100,7 +101,7 @@ task_head_warmup_steps: 5000
 
 
 # -- General settings:
-seed: 90
+seed: -1
 # seed is -1 means random, otherwise put a seed number that is greater than 0
 cudnn_benchmark: True
 curr_time: -1
@@ -114,5 +115,5 @@ working_abspath:
 
 
 # -- Output settings:
-checkpoint_dir: /export/home/outputs/pafomo/output_checkpoints/
-log_dir: /export/home/outputs/pafomo/output_logs/
+checkpoint_dir: /export/home/outputs/MILNCE/output_checkpoints/
+log_dir: /export/home/outputs/MILNCE/output_logs/

@@ -7,7 +7,7 @@ import platform
 import warnings
 warnings.filterwarnings("ignore")
 
-from args.args_PAFoMo import get_args_parser
+from args.args_Paprika import get_args_parser
 from datasets import return_dataset
 from models import create_model
 from utils.common_utils import (

@@ -1,8 +1,8 @@
 # -- Project settings:
-exp_name: PAFoMo_pretrain
+exp_name: Paprika_pretrain
 notes: none
-project: pafomo
-entity: hongluzhou
+project: 
+entity: 
 
 
 # -- wikiHow settings:
@@ -23,7 +23,7 @@ label_find_matched_nodes_criteria: topK
 label_find_matched_nodes_for_segments_thresh: 8
 label_find_matched_nodes_for_segments_topK: 3
 
-# ---- VTN
+# ---- VTM
 label_find_tasks_criteria: topK
 # {threshold | threshold+topK | topK}
 label_find_tasks_thresh: 50
@@ -103,5 +103,5 @@ partition_dataset: True
 
 
 # -- Output settings:
-checkpoint_dir: /export/home/outputs/pafomo/output_checkpoints/
-log_dir: /export/home/outputs/pafomo/output_logs/
+checkpoint_dir: /export/home/outputs/Paprika/output_checkpoints/
+log_dir: /export/home/outputs/Paprika/output_logs/

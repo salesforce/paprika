@@ -1,0 +1,1 @@
+CUDA_VISIBLE_DEVICES=0 python engines/main_Paprika_pretrain.py --cfg configs/Paprika_pretrain.yml --use_wandb 0

@@ -1,8 +1,8 @@
 # -- Project settings:
 exp_name: PKG_pseudo_labels
 notes: none
-project: pafomo
-entity: hongluzhou
+project: 
+entity: 
 
 
 # -- External knowledge settings:
@@ -79,11 +79,13 @@ label_khop: 2
 seed: -1
 # seed is -1 means random, otherwise put a seed number that is greater than 0
 curr_time: -1
-num_workers: 95
+num_workers: -1
 # num_workers -1 will dynamically compute the number of available workers
 working_abspath: 
+partition_dataset: True
+num_partitions: 8
 
 
 # -- Output settings:
-checkpoint_dir: /export/home/outputs/pafomo/output_checkpoints/
-log_dir: /export/home/outputs/pafomo/output_logs/
+checkpoint_dir: /export/home/outputs/Paprika/output_checkpoints/
+log_dir: /export/home/outputs/Paprika/output_logs/

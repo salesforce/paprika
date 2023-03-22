@@ -4,6 +4,8 @@ sys.path.insert(0, os.path.abspath('./'))
 import time
 import random
 import platform
+import warnings
+warnings.filterwarnings("ignore")
 
 from args.args_train_task_head import get_args_parser
 from datasets import return_dataset
