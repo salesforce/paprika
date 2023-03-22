@@ -1,6 +1,6 @@
 matplotlib==3.5.3
 monai==1.1.0
-numpy==1.21.2
+numpy==1.22.0
 pandas==1.4.3
 PyYAML==6.0
 scikit_learn==1.2.2
