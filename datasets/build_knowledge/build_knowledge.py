@@ -49,6 +49,11 @@ def obtain_external_knowledge(args, logger):
        
         from datasets.build_knowledge.pseudo_label_NRL import get_pseudo_label_NRL
         get_pseudo_label_NRL(args, logger)
+        
+    if hasattr(args, 'partition_dataset') and args.partition_dataset:
+        
+        from utils.dataset_utils import partition_dataset
+        partition_dataset(args, logger)
        
     # os._exit(0)
     return

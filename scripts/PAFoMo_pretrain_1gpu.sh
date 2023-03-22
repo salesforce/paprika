@@ -1,1 +1,0 @@
-CUDA_VISIBLE_DEVICES=0 python engines/main_PAFoMo_pretrain.py --cfg configs/PAFoMo_pretrain.yml --use_wandb 0

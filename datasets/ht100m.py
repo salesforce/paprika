@@ -39,6 +39,8 @@ class HT100M(Dataset):
                 'feats_all-mean_agg-rank_{}-of-{}.pickle'.format(
                     args.rank, args.world_size)), 'rb') as f:
                 self.feats_all = pickle.load(f)
+            
+                
         if need_logging(args):
             logger.info('\n\nRank: {} '.format(args.rank) + 
                         'Loading video feats (len: {}) took {} seconds'.format(

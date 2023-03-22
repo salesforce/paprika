@@ -2,9 +2,9 @@ import os
 
 import torch
 import torch.nn as nn
+from torch.nn import TransformerEncoderLayer 
 
 from models.misc import build_mlp
-from models.transformer import TransformerEncoderLayer
 
 
 class Task_Head(nn.Module):
@@ -22,11 +22,6 @@ class Task_Head(nn.Module):
             from models.position_encoding import PositionEmbeddingAbsoluteLearned_1D
             self.time_embed_layer = PositionEmbeddingAbsoluteLearned_1D(
                 args.model_step_cls_max_time_ids_embed, args.model_step_cls_segment_hidden_dim)
-        
-        elif args.model_step_cls_time_pos_embed_type == 'fixed_sinusoidal_1D':
-            from models.position_encoding import PositionEmbeddingFixedSine_1D
-            self.time_embed_layer = PositionEmbeddingFixedSine_1D(
-                args.model_step_cls_segment_hidden_dim)
         
         else:
             raise ValueError(f"not supported {self.args.model_step_cls_time_pos_embed_type}")
